@@ -9,16 +9,11 @@ public class Unit : MonoBehaviour {
 	public float speed = 20;
 	Vector3[] path;
 	int targetIndex;
-	public bool timer;
 	public float timersecs;
 
 	IEnumerator Timer (){
-		timer = true;
 		yield return new WaitForSeconds(timersecs);
-		print("1");
-		timer = false;
 		PathRequestManager.RequestPath(transform.position,target.position, OnPathFound);
-		timer = true;
 		StartCoroutine(Timer());
 	}
 
@@ -62,19 +57,19 @@ public class Unit : MonoBehaviour {
 		}
 	}
 
-	public void OnDrawGizmos() {
-		if (path != null) {
-			for (int i = targetIndex; i < path.Length; i ++) {
-				Gizmos.color = Color.black;
-				Gizmos.DrawCube(path[i], Vector3.one);
+	// public void OnDrawGizmos() {
+	// 	if (path != null) {
+	// 		for (int i = targetIndex; i < path.Length; i ++) {
+	// 			Gizmos.color = Color.black;
+	// 			Gizmos.DrawCube(path[i], Vector3.one);
 
-				if (i == targetIndex) {
-					Gizmos.DrawLine(transform.position, path[i]);
-				}
-				else {
-					Gizmos.DrawLine(path[i-1],path[i]);
-				}
-			}
-		}
-	}
+	// 			if (i == targetIndex) {
+	// 				Gizmos.DrawLine(transform.position, path[i]);
+	// 			}
+	// 			else {
+	// 				Gizmos.DrawLine(path[i-1],path[i]);
+	// 			}
+	// 		}
+	// 	}
+	// }
 }
